@@ -1,7 +1,7 @@
 {
     "name": "Locations",
     "description": "Google Maps plugin with multiple Locations, info boxes and navigations ",
-    "version": "0.1",
+    "version": "0.1.1",
     "url": "https://github.com/aldryn/aldryn-locations",
     "package-name": "aldryn-locations",
     "installed-apps": ["aldryn_locations"],
