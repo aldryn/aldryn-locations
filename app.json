@@ -1,0 +1,16 @@
+{
+    "name": "Locations",
+    "description": "Google Maps plugin with multiple Locations, info boxes and navigations ",
+    "version": "0.1",
+    "url": "https://github.com/aldryn/aldryn-locations",
+    "package-name": "aldryn-locations",
+    "installed-apps": ["aldryn_locations"],
+    "author": {
+        "name": "Divio AG",
+        "url": "https://www.divio.ch"
+    },
+    "license": {
+        "name": "BSD",
+        "text": "!literal-include LICENSE.txt"
+    }
+}
