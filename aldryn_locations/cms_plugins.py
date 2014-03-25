@@ -25,7 +25,7 @@ class MapCMSPlugin(LocationsBase):
     child_classes = ('LocationCMSPlugin', 'RouteLocationCMSPlugin')
     fieldsets = (
         (None, {
-            'fields': ('title',)
+            'fields': (('title', 'map_type'))
         }),
         (_('Advanced'), {
             'classes': ('collapse',),
