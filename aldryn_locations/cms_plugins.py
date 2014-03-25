@@ -1,4 +1,3 @@
-from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse
 
@@ -42,7 +41,7 @@ class MapCMSPlugin(LocationsBase):
                 'address': "%s, %s %s" % (item.address, item.zipcode, item.city),
                 'latlng': item.get_lat_lng() or None,
                 'content': item.content or None,
-                'admin': reverse("admin:cms_page_edit_plugin", args=[item.pk]),
+                'admin': reverse('admin:cms_page_edit_plugin', args=[item.pk]),
             }
 
         location_data = [
