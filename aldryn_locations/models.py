@@ -25,7 +25,7 @@ class MapPlugin(CMSPlugin):
     ZOOM_LEVELS = map(lambda c: (c, str(c)), range(22))
 
     zoom = models.CharField(
-        _('zoom level'), choices=ZOOM_LEVELS, blank=True, null=True,
+        _('Zoom level'), choices=ZOOM_LEVELS, blank=True, null=True,
         help_text=_('Leave empty for auto zoom'), max_length=20)
 
     route_planner_title = models.CharField(
@@ -64,28 +64,28 @@ class MapPlugin(CMSPlugin):
         ret = ''
 
         if self.child_plugin_instances:
-            locs = routes = 0
-            for location in self.child_plugin_instances:
-                if location.route_planner:
-                    routes += 1
-                else:
-                    locs += 1
+            locs = sum(not x.route_planner for x in self.child_plugin_instances)
+            routes = sum(x.route_planner for x in self.child_plugin_instances)
 
-            if locs:
-                if locs == 1:
-                    _loc = _('Location')
-                else:
-                    _loc = _('Locations')
+            _loc = _('Locations') if locs > 1 else _('Location')
+            _route = _('Routes') if routes > 1 else _('Route')
 
-                if routes:
-                    ret = u' (%i %s & %i %s)' % (locs, _loc, routes, _('Route'))
-                else:
-                    ret = u' (%i %s)' % (locs, _loc)
+            if locs and routes:
+                ret = u'%i %s & %i %s' % (locs, _loc, routes, _route)
+
+            elif locs:
+                ret = u'%i %s' % (locs, _loc)
 
             elif routes:
-                ret = u' (%i %s)' % (routes, _('Route'))
+                ret = u'%i %s' % (routes, _route)
 
-        return u'%s%s' % (self.title or _('Map'), ret)
+        else:
+            ret = u'Empty: please add at least one location or route'
+
+        if self.title:
+            return u'%s (%s)' % (self.title, ret)
+
+        return u'%s' % ret
 
     def get_route_planner(self):
         if self.child_plugin_instances:
