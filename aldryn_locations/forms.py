@@ -33,4 +33,4 @@ class RouteLocationPluginForm(ModelForm):
 
     def clean(self):
         # TODO: Do not allow more than 1 route per map
-        return super(LocationPluginForm, self).clean()
+        return super(RouteLocationPluginForm, self).clean()
