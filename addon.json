@@ -10,7 +10,6 @@
         "url": "https://www.divio.ch"
     },
     "license": {
-        "name": "BSD",
-        "text": "!literal-include LICENSE.txt"
+        "name": "BSD"
     }
 }
