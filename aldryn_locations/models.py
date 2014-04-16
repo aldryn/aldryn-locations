@@ -105,12 +105,13 @@ class LocationPlugin(CMSPlugin):
         _("additional content"), max_length=255, blank=True,
         help_text=_('Displayed under address in the bubble.'))
 
-    lat = models.DecimalField(
-        _('latitude'), max_digits=10, decimal_places=6, null=True, blank=True,
+    lat = models.FloatField(
+        _('latitude'), null=True, blank=True,
         help_text=_('Use latitude & longitude to fine tune the map position.'))
 
-    lng = models.DecimalField(
-        _('longitude'), max_digits=10, decimal_places=6, null=True, blank=True)
+    lng = models.FloatField(
+        _('longitude'), null=True, blank=True)
+    #show_route = models.BooleanField(verbose_name=_('show route'), default=False)
 
     @property
     def route_planner(self):
