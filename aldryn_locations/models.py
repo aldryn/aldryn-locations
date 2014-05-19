@@ -80,7 +80,7 @@ class MapPlugin(CMSPlugin):
                 ret = u'%i %s' % (routes, _route)
 
         else:
-            ret = u'Empty: please add at least one location or route'
+            ret = _(u'Empty: please add at least one location or route')
 
         if self.title:
             return u'%s (%s)' % (self.title, ret)
