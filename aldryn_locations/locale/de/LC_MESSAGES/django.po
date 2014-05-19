@@ -1,0 +1,186 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-05-19 09:54+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: cms_plugins.py:19
+msgid "Map"
+msgstr "Karte"
+
+#: cms_plugins.py:29 cms_plugins.py:92
+msgid "Advanced"
+msgstr "Erweitert"
+
+#: cms_plugins.py:85 models.py:70
+#: templates/aldryn_locations/plugins/locations.html:99
+msgid "Location"
+msgstr "Ort"
+
+#: cms_plugins.py:104
+msgid "Route Location"
+msgstr "Ort als Routenziel"
+
+#: forms.py:23
+msgid "Must be a positive integer followed by “px” or “%”."
+msgstr "Bitte einen positiven Integer gefolgt von \"px\" oder \"%\" angeben."
+
+#: forms.py:26
+msgid "Must be a positive integer followed by “px”."
+msgstr "Bitte einen positiven Integer gefolgt von \"%\" angeben."
+
+#: models.py:16
+msgid "Roadmap"
+msgstr "Strassenkarte"
+
+#: models.py:17
+msgid "Satellite"
+msgstr "Satellit"
+
+#: models.py:18
+msgid "Hybrid"
+msgstr "Hybrid"
+
+#: models.py:19
+msgid "Terrain"
+msgstr "Gelände"
+
+#: models.py:22
+msgid "map title"
+msgstr "Kartentitel"
+
+#: models.py:28
+msgid "Zoom level"
+msgstr "Vergrösserungsstufe"
+
+#: models.py:29
+msgid "Leave empty for auto zoom"
+msgstr "Leerlassen für automatische Anpassung der Vergrösserungsstufe"
+
+#: models.py:32
+msgid "Route Planner Title"
+msgstr "Routenplaner-Titel"
+
+#: models.py:33
+msgid "Calculate your fastest way to here"
+msgstr "Berechne den schnellsten Weg zum Ziel"
+
+#: models.py:36
+msgid "width"
+msgstr "Breite"
+
+#: models.py:37
+msgid "Plugin width (in pixels or percent)."
+msgstr "Plugin-Breite (in Pixeln oder Prozent)."
+
+#: models.py:40
+msgid "height"
+msgstr "Höhe"
+
+#: models.py:41
+msgid "Plugin height (in pixels)."
+msgstr "Plugin-Höhe (in Pixeln)."
+
+#: models.py:44
+msgid "Enable scrollwheel zooming on the map"
+msgstr "Zoomen durch Mausrad-Scrollen auf der Karte erlauben"
+
+#: models.py:47
+msgid "Enable double click to zoom"
+msgstr "Zoomen durch Doppelklick auf der Karte erlauben"
+
+#: models.py:49
+msgid "Allow map dragging"
+msgstr "Ziehen der Karte erlauben"
+
+#: models.py:52
+msgid "Enable keyboard shortcuts"
+msgstr "Tastaturkürzel erlauben"
+
+#: models.py:54
+msgid "Show pan control"
+msgstr "Bedienelemente auf der Karte anzeigen"
+
+#: models.py:56
+msgid "Show zoom control"
+msgstr "Vergrösserungskontrolle anzeigen"
+
+#: models.py:59
+msgid "Show Street View control"
+msgstr "Street View Button anzeigen"
+
+#: models.py:61
+msgid "Map Type"
+msgstr "Kartentyp"
+
+#: models.py:70
+msgid "Locations"
+msgstr "Orte"
+
+#: models.py:71
+msgid "Routes"
+msgstr "Routen"
+
+#: models.py:71
+msgid "Route"
+msgstr "Route"
+
+#: models.py:83
+msgid "Empty: please add at least one location or route"
+msgstr "Leer: Bitte fügen Sie mindestens ein Ort hinzu"
+
+#: models.py:100
+msgid "address"
+msgstr "Adresse"
+
+#: models.py:101
+msgid "zip code"
+msgstr "PLZ"
+
+#: models.py:102
+msgid "city"
+msgstr "Ort"
+
+#: models.py:105
+msgid "additional content"
+msgstr "zusätzlicher Inhalt"
+
+#: models.py:106
+msgid "Displayed under address in the bubble."
+msgstr "Wird unter der Adresse in der Blase angezeigt"
+
+#: models.py:109
+msgid "latitude"
+msgstr "Breitengrad"
+
+#: models.py:110
+msgid "Use latitude & longitude to fine tune the map position."
+msgstr ""
+"Benützen Sie den Breiten- und Längengrad um die Kartenposition genauer "
+"einzustellen."
+
+#: models.py:113
+msgid "longitude"
+msgstr "Längengrad"
+
+#: templates/aldryn_locations/plugins/locations.html:18
+msgid "Your address: "
+msgstr "Ihre Adresse: "
+
+#: templates/aldryn_locations/plugins/locations.html:25
+msgid "Get directions"
+msgstr "Route berechnen"
