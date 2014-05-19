@@ -1,5 +1,6 @@
 include LICENSE.txt
 include README.md
+recursive-include aldryn_locations/locale *
 recursive-include aldryn_locations/migrations *
 recursive-include aldryn_locations/templates *
 recursive-include aldryn_locations/static *
