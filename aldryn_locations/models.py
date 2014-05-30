@@ -22,7 +22,7 @@ class MapPlugin(CMSPlugin):
     title = models.CharField(_("map title"), max_length=100, blank=True,
                              null=True)
 
-    ZOOM_LEVELS = map(lambda c: (c, str(c)), range(22))
+    ZOOM_LEVELS = [(str(level), str(level)) for level in range(22)]
 
     zoom = models.CharField(
         _('Zoom level'), choices=ZOOM_LEVELS, blank=True, null=True,
