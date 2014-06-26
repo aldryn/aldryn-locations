@@ -44,9 +44,12 @@ class MapCMSPlugin(LocationsBase):
                 'admin': reverse('admin:cms_page_edit_plugin', args=[item.pk]),
             }
 
-        location_data = [
-            prepare_item(location) for location in instance.child_plugin_instances
-        ]
+        if instance.child_plugin_instances:
+            location_data = [
+                prepare_item(location) for location in instance.child_plugin_instances
+            ]
+        else:
+            location_data = []
 
         # Options for the map comes from plugin so I assigned it here
         options = {
