@@ -1,10 +1,10 @@
 # coding: utf-8
 import re
-from django import forms
-from django.forms.models import ModelForm, BaseInlineFormSet
+
+from django.forms.models import ModelForm
 from django.utils.translation import ugettext_lazy as _
 
-from .models import MapPlugin, RouteLocationPlugin
+from .models import MapPlugin, RouteLocationPlugin, EmbedViewPlugin
 
 
 class MapPluginForm(ModelForm):
@@ -34,3 +34,12 @@ class RouteLocationPluginForm(ModelForm):
     def clean(self):
         # TODO: Do not allow more than 1 route per map
         return super(RouteLocationPluginForm, self).clean()
+
+
+class EmbedViewPluginForm(ModelForm):
+    class Meta:
+        model = EmbedViewPlugin
+
+    def __init__(self, *args, **kwargs):
+        super(EmbedViewPluginForm, self).__init__(*args, **kwargs)
+        self.fields['center'].required = True

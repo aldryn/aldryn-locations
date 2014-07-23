@@ -1,13 +1,14 @@
+import json
+
 from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse
-
-import json
 
 from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 
-from .forms import MapPluginForm, RouteLocationPluginForm
-from .models import LocationPlugin, MapPlugin, RouteLocationPlugin
+from .forms import MapPluginForm, RouteLocationPluginForm, EmbedViewPluginForm
+from .models import LocationPlugin, MapPlugin, RouteLocationPlugin, EmbedPlacePlugin, EmbedViewPlugin, \
+    EmbedSearchPlugin, EmbedDirectionsPlugin
 
 
 class LocationsBase(CMSPluginBase):
@@ -79,8 +80,6 @@ class MapCMSPlugin(LocationsBase):
 
         return context
 
-plugin_pool.register_plugin(MapCMSPlugin)
-
 
 class LocationCMSPlugin(LocationsBase):
     render_template = "aldryn_locations/plugins/empty.html"
@@ -98,12 +97,78 @@ class LocationCMSPlugin(LocationsBase):
         }),
     )
 
-plugin_pool.register_plugin(LocationCMSPlugin)
-
 
 class RouteLocationCMSPlugin(LocationCMSPlugin):
     model = RouteLocationPlugin
     form = RouteLocationPluginForm
     name = _('Route Location')
 
+
+# 'New Maps' embed plugins (IFrame)
+
+class EmbedMapCMSPluginBase(LocationsBase):
+    render_template = "aldryn_locations/plugins/embed_map.html"
+    fieldsets = (
+        (None, {
+            'fields': ('query', ),
+        }),
+        (_('Advanced'), {
+            'classes': ('collapse',),
+            'fields': ('center', 'zoom', 'map_type', 'ui_lang', 'region', ('height', 'width')),
+        }),
+    )
+
+    class Meta:
+        abstract = True
+
+
+class EmbedPlaceCMSPlugin(EmbedMapCMSPluginBase):
+    model = EmbedPlacePlugin
+    name = _('Place (IFrame)')
+
+
+class EmbedSearchCMSPlugin(EmbedMapCMSPluginBase):
+    model = EmbedSearchPlugin
+    name = _('Search (IFrame)')
+
+
+class EmbedViewCMSPlugin(EmbedMapCMSPluginBase):
+    model = EmbedViewPlugin
+    form = EmbedViewPluginForm
+    name = _('View (IFrame)')
+
+    fieldsets = (
+        (None, {
+            'fields': ('center', 'zoom'),
+        }),
+        (_('Advanced'), {
+            'classes': ('collapse',),
+            'fields': ('map_type', 'ui_lang', 'region', ('height', 'width')),
+        }),
+    )
+
+
+class EmbedDirectionsCMSPlugin(EmbedMapCMSPluginBase):
+    model = EmbedDirectionsPlugin
+    name = _('Directions (IFrame)')
+    fieldsets = (
+        (None, {
+            'fields': ('origin', 'destination'),
+        }),
+        (None, {
+            'fields': ('waypoints', 'travel_mode', 'avoid', 'units'),
+        }),
+        (_('Advanced'), {
+            'classes': ('collapse',),
+            'fields': ('center', 'zoom', 'map_type', 'ui_lang', 'region', ('height', 'width')),
+        }),
+    )
+
+
+plugin_pool.register_plugin(MapCMSPlugin)
+plugin_pool.register_plugin(LocationCMSPlugin)
 plugin_pool.register_plugin(RouteLocationCMSPlugin)
+plugin_pool.register_plugin(EmbedPlaceCMSPlugin)
+plugin_pool.register_plugin(EmbedSearchCMSPlugin)
+plugin_pool.register_plugin(EmbedViewCMSPlugin)
+plugin_pool.register_plugin(EmbedDirectionsCMSPlugin)
