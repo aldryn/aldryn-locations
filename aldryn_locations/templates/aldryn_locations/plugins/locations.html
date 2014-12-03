@@ -1,6 +1,6 @@
 {% load i18n static cms_tags sekizai_tags %}
 
-<div class="plugin plugin-googlemap" id="plugin-googlemap-{{ object.pk }}">
+<div class="aldryn aldryn-locations js-aldryn-locations-{{ object.pk }}">
     {# rendering plugins for frontend editing #}
     {% for plugin in object.child_plugin_instances %}
         {% render_plugin plugin %}
@@ -8,41 +8,49 @@
 
     {% if object.title %}<h2>{{ object.title }}</h2>{% endif %}
 
-    <div class="google-map-container" style="width:{{ object.width }}; height:{{ object.height }};"></div>
+    <div class="aldryn-locations-container" style="width: {{ object.width }}; height: {{ object.height }};"></div>
 
     {% if object.get_route_planner %}
-    <div class="google-map-route">
-        <form action="//maps.googleapis.com/maps/api/directions/json" method="get" class="form google-map-routeplanner" role="form">
-            <fieldset>
-                {% if object.route_planner_title %}<h3>{{ object.route_planner_title }}</h3>{% endif %}
-                <label><input type="text" class="input-text" placeholder="{% trans "Your address: " %}" /></label>
-                <span class="google-map-destinations visuallyhidden"><input type="hidden" value="{% for address in object.get_route_planner %}{{ address }} {% endfor %}" /></span>
-                <span class="google-map-options">
-                    <span data-type="driving"><span>&nbsp;</span></span>
-                    <span data-type="transit"><span>&nbsp;</span></span>
-                    <span data-type="walking"><span>&nbsp;</span></span>
-                    <span data-type="bicycling"><span>&nbsp;</span></span>
+    <form action="//maps.googleapis.com/maps/api/directions/json" class="aldryn-locations-form" method="get" role="form">
+        <fieldset>
+            {% if object.route_planner_title %}<legend>{{ object.route_planner_title }}</legend>{% endif %}
+            <div class="form-group">
+                <label class="control-label" for="field-aldryn-locations-input-{{ object.pk }}">{% trans "Your address" %}</label>
+                <input type="text" class="form-control" id="field-aldryn-locations-input-{{ object.pk }}" placeholder="{% trans "Street, City or Country" %}" />
+                <input type="hidden" value="{% for address in object.get_route_planner %}{{ address }} {% endfor %}" />
+            </div>
+
+            <div class="form-group">
+                <span class="aldryn-locations-route" hidden="hidden" aria-hidden="true">
+                    <span data-type="driving"><span></span></span>
+                    <span data-type="transit"><span></span></span>
+                    <span data-type="walking"><span></span></span>
+                    <span data-type="bicycling"><span></span></span>
                 </span>
-                <label><input type="submit" value="{% trans 'Get directions' %}" class="btn" /></label>
-            </fieldset>
-        </form>
-    </div>
-    <div class="google-map-panel"></div>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-default">{% trans "Get directions" %}</button>
+            </div>
+        </fieldset>
+    </form>
+
+    <div class="aldryn-locations-form-output"></div>
     {% endif %}
 </div>
 
 {% addtoblock "js" %}<script src="//maps-api-ssl.google.com/maps/api/js?v=3&amp;sensor=true"></script>{% endaddtoblock %}
 {% addtoblock "js" %}<script src="{% static "js/libs/class.min.js" %}"></script>{% endaddtoblock %}
-{% addtoblock "js" %}<script src="{% static "js/addons/cl.locations.js" %}"></script>{% endaddtoblock %}
+{% addtoblock "js" %}<script src="{% static "js/addons/cl.locations.min.js" %}"></script>{% endaddtoblock %}
 {% addtoblock "js" %}
 <script>
 jQuery(document).ready(function () {
-    new Cl.Locations('#plugin-googlemap-{{ object.pk }}', {
+    new Cl.Locations('.js-aldryn-locations-{{ object.pk }}', {
         'zoom': {{ object.zoom|default:12 }},
         'mapType': {{ map_type|safe }},
         'settings': {{ options|safe }},
         'markers': {{ locations|safe }},
-        'route_planner': {{ route_planner|safe }},
+        'routePlanner': {{ route_planner|safe }},
         'edit': {% if request.toolbar.edit_mode %}true{% else %}false{% endif %}
     });
 });
