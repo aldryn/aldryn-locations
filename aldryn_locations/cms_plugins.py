@@ -107,7 +107,7 @@ class RouteLocationCMSPlugin(LocationCMSPlugin):
 # 'New Maps' embed plugins (IFrame)
 
 class EmbedMapCMSPluginBase(LocationsBase):
-    render_template = "aldryn_locations/plugins/embed_map.html"
+    render_template = "aldryn_locations/plugins/locations_embed.html"
     fieldsets = (
         (None, {
             'fields': ('query', ),
