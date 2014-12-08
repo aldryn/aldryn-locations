@@ -67,6 +67,11 @@ var Cl = window.Cl || {};
             this._routePlanner();
         },
 
+        /**
+         * Adds a collection of markers to the google map instance
+         *
+         * @param markers {Object[]} exptects a collection of markers (see addMarker())
+         */
         addMarkers: function (markers) {
             var that = this;
 
@@ -95,6 +100,15 @@ var Cl = window.Cl || {};
             }
         },
 
+        /**
+         * adds a single marker to the google map instance
+         *
+         * @param marker {Object} marker object
+         * @param marker.address {String} expects a valid address
+         * @param marker.admin {String} admin link for editing within the cms
+         * @param [marker.content] {String} content for the markerInfoWindow
+         * @param [marker.latlng] {Number} expects valid lat and lng values
+         */
         addMarker: function (marker) {
             var that = this;
 
