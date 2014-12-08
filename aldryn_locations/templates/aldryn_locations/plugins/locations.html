@@ -11,31 +11,31 @@
     <div class="aldryn-locations-container" style="width: {{ object.width }}; height: {{ object.height }};"></div>
 
     {% if object.get_route_planner %}
-    <form action="//maps.googleapis.com/maps/api/directions/json" class="aldryn-locations-form" method="get" role="form">
-        <fieldset>
-            {% if object.route_planner_title %}<legend>{{ object.route_planner_title }}</legend>{% endif %}
-            <div class="form-group">
-                <label class="control-label" for="field-aldryn-locations-input-{{ object.pk }}">{% trans "Your address" %}</label>
-                <input type="text" class="form-control" id="field-aldryn-locations-input-{{ object.pk }}" placeholder="{% trans "Street, City or Country" %}" />
-                <input type="hidden" value="{% for address in object.get_route_planner %}{{ address }} {% endfor %}" />
-            </div>
+        <form action="//maps.googleapis.com/maps/api/directions/json" class="aldryn-locations-form" method="get" role="form">
+            <fieldset>
+                {% if object.route_planner_title %}<legend>{{ object.route_planner_title }}</legend>{% endif %}
+                <div class="form-group">
+                    <label class="control-label" for="field-aldryn-locations-input-{{ object.pk }}">{% trans "Your address" %}</label>
+                    <input type="text" class="form-control" id="field-aldryn-locations-input-{{ object.pk }}" placeholder="{% trans "Street, City or Country" %}" />
+                    <input type="hidden" value="{% for address in object.get_route_planner %}{{ address }} {% endfor %}" />
+                </div>
 
-            <div class="form-group">
-                <span class="aldryn-locations-route" hidden="hidden" aria-hidden="true">
-                    <span data-type="driving"><span></span></span>
-                    <span data-type="transit"><span></span></span>
-                    <span data-type="walking"><span></span></span>
-                    <span data-type="bicycling"><span></span></span>
-                </span>
-            </div>
+                <div class="form-group">
+                    <span class="aldryn-locations-route" hidden="hidden" aria-hidden="true">
+                        <span data-type="driving"><span></span></span>
+                        <span data-type="transit"><span></span></span>
+                        <span data-type="walking"><span></span></span>
+                        <span data-type="bicycling"><span></span></span>
+                    </span>
+                </div>
 
-            <div class="form-group">
-                <button type="submit" class="btn btn-default">{% trans "Get directions" %}</button>
-            </div>
-        </fieldset>
-    </form>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-default">{% trans "Get directions" %}</button>
+                </div>
+            </fieldset>
+        </form>
 
-    <div class="aldryn-locations-form-output"></div>
+        <div class="aldryn-locations-form-output"></div>
     {% endif %}
 </div>
 
