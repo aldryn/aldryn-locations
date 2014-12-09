@@ -19,6 +19,8 @@ Run ``pip install aldryn-locations``.
 
 Add ``aldryn_locations`` to ``INSTALLED_APPS`` and run ``manage.py migrate aldryn_locations``.
 
+Add ``ALDRYN_LOCATIONS_GOOGLEMAPS_APIKEY`` to your ``settings.py`` using the provided key from google
+
 Plugins
 -------
 Aldryn Locations offers five different plugins to use. First one is the ``Map`` which works with the Google Maps JavaScript API. The other four, ``Place``, ``Directions``, ``Search`` and ``View``, are based on [Google's embed maps](https://developers.google.com/maps/documentation/embed/guide).
