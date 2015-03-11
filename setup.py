@@ -3,6 +3,10 @@
 from setuptools import setup, find_packages
 from aldryn_locations import __version__
 
+REQUIREMENTS = [
+    'aldryn-boilerplates>=0.6',
+]
+
 CLASSIFIERS = [
     'Development Status :: 2 - Pre-Alpha',
     'Environment :: Web Environment',
@@ -27,7 +31,7 @@ setup(
     license='LICENSE.txt',
     platforms=['OS Independent'],
     classifiers=CLASSIFIERS,
-    long_description=open('README.md').read(),
+    long_description=open('README.rst').read(),
     include_package_data=True,
     zip_safe=False
 )
