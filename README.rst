@@ -1,16 +1,24 @@
 Aldryn Locations
 ================
 
-A Google Maps plugin for Aldryn with multiple Locations, info boxes and navigations.
+Aldryn Locations is the easiest way to integrate Google Maps into `Aldryn <http://aldryn.com>`_ and `django CMS
+<http://django-cms>`_ sites via Google's API.
+
+It's fully featured, and includes several plugins to provide support for:
+
+* multiple locations
+* location information
+* routes and directions
+* searching
 
 
 Aldryn Platform Users
 ---------------------
 
-Choose a site you want to install the add-on to from the dashboard. Then go to ``Apps -> Install app`` and click ``Install`` next to ``Locations`` app.
+Choose a site you want to install the add-on to from the dashboard. Then go to ``Apps -> Install app`` and click
+``Install`` next to ``Locations`` app.
 
 Redeploy the site.
-
 
 Manual Installation
 -------------------
