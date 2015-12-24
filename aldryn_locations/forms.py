@@ -8,8 +8,24 @@ from .models import MapPlugin, RouteLocationPlugin, EmbedViewPlugin
 
 
 class MapPluginForm(ModelForm):
+
     class Meta:
         model = MapPlugin
+        fields = [
+            'title',
+            'zoom',
+            'route_planner_title',
+            'width',
+            'height',
+            'scrollwheel',
+            'double_click_zoom',
+            'draggable',
+            'keyboard_shortcuts',
+            'pan_control',
+            'zoom_control',
+            'street_view_control',
+            'map_type',
+        ]
 
     def clean(self):
         cleaned_data = super(MapPluginForm, self).clean()
@@ -28,8 +44,17 @@ class MapPluginForm(ModelForm):
 
 
 class RouteLocationPluginForm(ModelForm):
+
     class Meta:
         model = RouteLocationPlugin
+        fields = [
+            'address',
+            'zipcode',
+            'city',
+            'content',
+            'lat',
+            'lng',
+        ]
 
     def clean(self):
         # TODO: Do not allow more than 1 route per map
@@ -37,8 +62,19 @@ class RouteLocationPluginForm(ModelForm):
 
 
 class EmbedViewPluginForm(ModelForm):
+
     class Meta:
         model = EmbedViewPlugin
+        fields = [
+            'query',
+            'map_type',
+            'center',
+            'zoom',
+            'ui_lang',
+            'region',
+            'width',
+            'height',
+        ]
 
     def __init__(self, *args, **kwargs):
         super(EmbedViewPluginForm, self).__init__(*args, **kwargs)
