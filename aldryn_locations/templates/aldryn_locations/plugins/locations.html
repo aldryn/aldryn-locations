@@ -7,33 +7,17 @@
 <div id="googlemap-{{ object.pk }}" class="googlemap" style="width: {{ object.width }}; height: {{ object.height }};"></div>
 
 {% if object.get_route_planner %}
-    <form action="//maps.googleapis.com/maps/api/directions/json" class="aldryn-locations-form" method="get" role="form">
+    <form method="get" action="https://www.google.com/maps/dir/" target="_blank">
         <fieldset>
             {% if object.route_planner_title %}
                 <legend>{{ object.route_planner_title }}</legend>
             {% endif %}
-            <div class="form-group">
-                <label class="control-label" for="field-aldryn-locations-input-{{ object.pk }}">{% trans "Your address" %}</label>
-                <input type="text" class="form-control" id="field-aldryn-locations-input-{{ object.pk }}" placeholder="{% trans "Street, City or Country" %}" />
-                <input type="hidden" value="{% for address in object.get_route_planner %}{{ address }} {% endfor %}" />
-            </div>
-
-            <div class="form-group">
-                <span class="aldryn-locations-route" hidden="hidden" aria-hidden="true">
-                    <span data-type="driving"><span></span></span>
-                    <span data-type="transit"><span></span></span>
-                    <span data-type="walking"><span></span></span>
-                    <span data-type="bicycling"><span></span></span>
-                </span>
-            </div>
-
-            <div class="form-group">
-                <button type="submit" class="btn btn-default">{% trans "Get directions" %}</button>
-            </div>
+            <label for="googlemap-field-{{ object.pk }}">{% trans "Your address" %}</label>
+            <input type="text" name="saddr" id="googlemap-field-{{ object.pk }}" placeholder="{% trans "Street, City or Country" %}">
+            <input type="hidden" name="daddr" value="{% for address in object.get_route_planner %}{{ address }} {% endfor %}">
+            <button type="submit">{% trans "Get directions" %}</button>
         </fieldset>
     </form>
-
-    <div class="aldryn-locations-form-output"></div>
 {% endif %}
 
 {# rendering plugins for frontend editing #}
