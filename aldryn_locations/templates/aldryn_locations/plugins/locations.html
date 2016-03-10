@@ -1,0 +1,140 @@
+{% load i18n static cms_tags sekizai_tags %}
+
+{% if object.title %}
+    <h2>{{ object.title }}</h2>
+{% endif %}
+
+<div id="googlemap-{{ object.pk }}" class="googlemap" style="width: {{ object.width }}; height: {{ object.height }};"></div>
+
+{% if object.get_route_planner %}
+    <form action="//maps.googleapis.com/maps/api/directions/json" class="aldryn-locations-form" method="get" role="form">
+        <fieldset>
+            {% if object.route_planner_title %}
+                <legend>{{ object.route_planner_title }}</legend>
+            {% endif %}
+            <div class="form-group">
+                <label class="control-label" for="field-aldryn-locations-input-{{ object.pk }}">{% trans "Your address" %}</label>
+                <input type="text" class="form-control" id="field-aldryn-locations-input-{{ object.pk }}" placeholder="{% trans "Street, City or Country" %}" />
+                <input type="hidden" value="{% for address in object.get_route_planner %}{{ address }} {% endfor %}" />
+            </div>
+
+            <div class="form-group">
+                <span class="aldryn-locations-route" hidden="hidden" aria-hidden="true">
+                    <span data-type="driving"><span></span></span>
+                    <span data-type="transit"><span></span></span>
+                    <span data-type="walking"><span></span></span>
+                    <span data-type="bicycling"><span></span></span>
+                </span>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-default">{% trans "Get directions" %}</button>
+            </div>
+        </fieldset>
+    </form>
+
+    <div class="aldryn-locations-form-output"></div>
+{% endif %}
+
+{# rendering plugins for frontend editing #}
+{% for plugin in object.child_plugin_instances %}
+    {% render_plugin plugin %}
+{% endfor %}
+
+{% addtoblock "js" %}<script src="//maps.googleapis.com/maps/api/js?v=3"></script>{% endaddtoblock %}
+{% addtoblock "js" %}
+<script>
+(function () {
+    var container = document.getElementById('googlemap-{{ object.pk }}');
+    var bound = new google.maps.LatLngBounds();
+    var geocoder = new google.maps.Geocoder();
+    var markers = {{ locations|safe }};
+    var routePlanner = {{ route_planner|safe }};
+    var editMode = {% if request.toolbar.edit_mode %}true{% else %}false{% endif %};
+    var map;
+    var infoWindow;
+    var listener;
+
+    // prepare options
+    var options = {{ options|safe }};
+    options.zoom = {{ object.zoom|default:12 }};
+    options.mapType = {{ map_type|safe }};
+
+    // add markers
+    function geocode(marker) {
+        geocoder.geocode({'address': marker.address}, function (results, status) {
+            if (status === google.maps.GeocoderStatus.OK) {
+                marker.latlng = results[0].geometry.location;
+                addMarker(marker);
+            }
+        });
+    }
+
+    function addMarker (marker) {
+        marker = new google.maps.Marker({
+            map: map,
+            admin: marker.admin,
+            position: marker.latlng,
+            title: marker.title,
+            content: marker.content
+        });
+
+        // attach info window
+        if (marker.content) {
+            infoWindow = new google.maps.InfoWindow({
+                disableAutoPan: true,
+                content: marker.content
+            });
+
+            google.maps.event.addListener(marker, 'click', function () {
+                infoWindow.open(map, marker);
+                marker.setAnimation(google.maps.Animation.BOUNCE);
+                setTimeout(function () { marker.setAnimation(null); }, 750);
+            });
+
+            setTimeout(function () {
+                infoWindow.open(map, marker);
+            }, 500);
+        }
+
+        // add admin edit capabilities for markers
+        if (editMode && window.CMS) {
+            google.maps.event.addListener(marker, 'dblclick', function () {
+                var modal = new CMS.Modal();
+                modal.open({
+                    url: marker.admin
+                });
+            });
+        }
+
+        // update markers and map position
+        markers.push(marker);
+        bound.extend(marker.position);
+        map.fitBounds(bound);
+        map.panBy(0, -50);
+
+        // reassign zoom level
+        listener = google.maps.event.addListener(map, 'idle', function () {
+            if (map.getZoom() > options.zoom) { map.setZoom(options.zoom); }
+            google.maps.event.removeListener(listener);
+        });
+    }
+
+    // loop through all given markers
+    for (var i = 0; i < markers.length; i++) {
+        var marker = markers[i];
+
+        //  check if we need to calculate the latlng or continue
+        if (marker.latlng === null) {
+            geocode(marker);
+        } else {
+            marker.latlng = new google.maps.LatLng(marker.latlng);
+            addMarker(marker);
+        }
+    }
+
+    // load the map
+    map = new google.maps.Map(container, options);
+})();
+</script>
+{% endaddtoblock %}
