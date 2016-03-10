@@ -6,9 +6,8 @@ CHANGELOG
 ------------------
 
 * Add stripped default django templates to `/aldryn_locations/templates`
-* Remove unused render_placeholder configs
-* Add static_placeholders where necessary
-* Simplify templates
+* Fixed an issue with modal.open
+* Removed deprecated sensor attribute
 
 
 0.5.0 (2015-03-11)
