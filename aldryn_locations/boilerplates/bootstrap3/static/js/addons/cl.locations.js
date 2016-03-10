@@ -144,7 +144,9 @@ var Cl = window.Cl || {};
             if (this.options.edit && window.CMS) {
                 google.maps.event.addListener(marker, 'dblclick', function () {
                     var modal = new CMS.Modal();
-                    modal.open(marker.admin, 'Location');
+                    modal.open(
+                        url: marker.admin
+                    );
                 });
             }
 
