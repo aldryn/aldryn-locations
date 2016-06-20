@@ -1,0 +1,9 @@
+[main]
+host = https://www.transifex.com
+
+[aldryn-locations.aldryn_locations]
+file_filter = aldryn_locations/locale/<lang>/LC_MESSAGES/django.po
+source_file = aldryn_locations/locale/en/LC_MESSAGES/django.po
+source_lang = en
+type = PO
+
