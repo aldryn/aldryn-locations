@@ -1,0 +1,354 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-06-20 11:03+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: boilerplates/bootstrap3/templates/aldryn_locations/plugins/locations.html:18
+#: templates/aldryn_locations/plugins/locations.html:15
+msgid "Your address"
+msgstr ""
+
+#: boilerplates/bootstrap3/templates/aldryn_locations/plugins/locations.html:19
+#: templates/aldryn_locations/plugins/locations.html:16
+msgid "Street, City or Country"
+msgstr ""
+
+#: boilerplates/bootstrap3/templates/aldryn_locations/plugins/locations.html:33
+#: boilerplates/legacy/templates/aldryn_locations/plugins/locations.html:26
+#: templates/aldryn_locations/plugins/locations.html:18
+msgid "Get directions"
+msgstr ""
+
+#: boilerplates/legacy/templates/aldryn_locations/plugins/locations.html:18
+msgid "Your address: "
+msgstr ""
+
+#: cms_plugins.py:20
+msgid "Map"
+msgstr ""
+
+#: cms_plugins.py:30 cms_plugins.py:94 cms_plugins.py:115 cms_plugins.py:144
+#: cms_plugins.py:161
+msgid "Advanced"
+msgstr ""
+
+#: cms_plugins.py:87 models.py:76
+msgid "Location"
+msgstr ""
+
+#: cms_plugins.py:104
+msgid "Route Location"
+msgstr ""
+
+#: cms_plugins.py:127
+msgid "Place (IFrame)"
+msgstr ""
+
+#: cms_plugins.py:132
+msgid "Search (IFrame)"
+msgstr ""
+
+#: cms_plugins.py:138
+msgid "View (IFrame)"
+msgstr ""
+
+#: cms_plugins.py:153
+msgid "Directions (IFrame)"
+msgstr ""
+
+#: forms.py:39
+msgid "Must be a positive integer followed by “px” or “%”."
+msgstr ""
+
+#: forms.py:42
+msgid "Must be a positive integer followed by “px”."
+msgstr ""
+
+#: models.py:18
+msgid "Roadmap"
+msgstr ""
+
+#: models.py:19
+msgid "Satellite"
+msgstr ""
+
+#: models.py:23
+msgid "Hybrid"
+msgstr ""
+
+#: models.py:24
+msgid "Terrain"
+msgstr ""
+
+#: models.py:30
+msgid "map title"
+msgstr ""
+
+#: models.py:34 models.py:157
+msgid "Zoom level"
+msgstr ""
+
+#: models.py:35
+msgid "Leave empty for auto zoom"
+msgstr ""
+
+#: models.py:38
+msgid "Route Planner Title"
+msgstr ""
+
+#: models.py:39
+msgid "Calculate your fastest way to here"
+msgstr ""
+
+#: models.py:42 models.py:169
+msgid "width"
+msgstr ""
+
+#: models.py:43 models.py:170
+msgid "Plugin width (in pixels or percent)."
+msgstr ""
+
+#: models.py:46 models.py:173
+msgid "height"
+msgstr ""
+
+#: models.py:47 models.py:174
+msgid "Plugin height (in pixels)."
+msgstr ""
+
+#: models.py:50
+msgid "Enable scrollwheel zooming on the map"
+msgstr ""
+
+#: models.py:53
+msgid "Enable double click to zoom"
+msgstr ""
+
+#: models.py:55
+msgid "Allow map dragging"
+msgstr ""
+
+#: models.py:58
+msgid "Enable keyboard shortcuts"
+msgstr ""
+
+#: models.py:60
+msgid "Show pan control"
+msgstr ""
+
+#: models.py:62
+msgid "Show zoom control"
+msgstr ""
+
+#: models.py:65
+msgid "Show Street View control"
+msgstr ""
+
+#: models.py:67 models.py:149
+msgid "Map Type"
+msgstr ""
+
+#: models.py:76
+msgid "Locations"
+msgstr ""
+
+#: models.py:77
+msgid "Routes"
+msgstr ""
+
+#: models.py:77
+msgid "Route"
+msgstr ""
+
+#: models.py:89
+msgid "Empty: please add at least one location or route"
+msgstr ""
+
+#: models.py:106
+msgid "address"
+msgstr ""
+
+#: models.py:107
+msgid "zip code"
+msgstr ""
+
+#: models.py:108
+msgid "city"
+msgstr ""
+
+#: models.py:111
+msgid "additional content"
+msgstr ""
+
+#: models.py:112
+msgid "Displayed under address in the bubble."
+msgstr ""
+
+#: models.py:115
+msgid "latitude"
+msgstr ""
+
+#: models.py:116
+msgid "Use latitude & longitude to fine tune the map position."
+msgstr ""
+
+#: models.py:119
+msgid "longitude"
+msgstr ""
+
+#: models.py:146
+msgid "Query"
+msgstr ""
+
+#: models.py:146
+msgid ""
+"defines the place to highlight on the map. It accepts a location as either a "
+"place name or address"
+msgstr ""
+
+#: models.py:152
+msgid "Center of the map (latitude + longitude)"
+msgstr ""
+
+#: models.py:153
+msgid ""
+"optionally define the center of the map view. It accepts a comma-separated "
+"latitude and longitude value (such as 37.4218,-122.0840)."
+msgstr ""
+
+#: models.py:158
+msgid ""
+"0 (the whole world) to 21 (individual buildings). Leave empty for auto zoom"
+msgstr ""
+
+#: models.py:161
+msgid "language for ui elements"
+msgstr ""
+
+#: models.py:161
+msgid "default to page language"
+msgstr ""
+
+#: models.py:164
+msgid "map region (ccTLD)"
+msgstr ""
+
+#: models.py:165
+msgid ""
+" defines the appropriate borders and labels to display, based on geo-"
+"political sensitivities. Accepts a region code specified as a two-character "
+"ccTLD (top-level domain) value."
+msgstr ""
+
+#: models.py:238
+msgid "Automatic"
+msgstr ""
+
+#: models.py:247
+msgid "Driving"
+msgstr ""
+
+#: models.py:248
+msgid "Walking"
+msgstr ""
+
+#: models.py:249
+msgid "Bicycling"
+msgstr ""
+
+#: models.py:250
+msgid "Transit"
+msgstr ""
+
+#: models.py:251
+msgid "Flying"
+msgstr ""
+
+#: models.py:259
+msgid "Tolls"
+msgstr ""
+
+#: models.py:260
+msgid "Highways"
+msgstr ""
+
+#: models.py:261
+msgid "Ferries"
+msgstr ""
+
+#: models.py:263
+msgid "Tolls & Highways"
+msgstr ""
+
+#: models.py:264
+msgid "Tolls & Ferries"
+msgstr ""
+
+#: models.py:265
+msgid "Ferries & Highways"
+msgstr ""
+
+#: models.py:267
+msgid "Tolls, Ferries & Highways"
+msgstr ""
+
+#: models.py:271
+msgid "Metric"
+msgstr ""
+
+#: models.py:272
+msgid "Imperial"
+msgstr ""
+
+#: models.py:280
+msgid "origin"
+msgstr ""
+
+#: models.py:281
+msgid ""
+"defines the origin and accepts a location as either a place name or address"
+msgstr ""
+
+#: models.py:284
+msgid "destination"
+msgstr ""
+
+#: models.py:285
+msgid ""
+"defines the destination and accepts a location as either a place name or "
+"address"
+msgstr ""
+
+#: models.py:288
+msgid "list of waypoints"
+msgstr ""
+
+#: models.py:289
+msgid "separated by the pipe character (|) (e.g. Berlin,Germany|Paris,France)"
+msgstr ""
+
+#: models.py:291
+msgid "travel mode"
+msgstr ""
+
+#: models.py:292
+msgid "avoid certain means"
+msgstr ""
+
+#: models.py:294
+msgid "units for distances in results"
+msgstr ""
