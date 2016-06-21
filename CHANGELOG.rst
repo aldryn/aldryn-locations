@@ -2,6 +2,12 @@ CHANGELOG
 =========
 
 
+1.0.1 (UNRELEASED)
+------------------
+
+* Added translations infrastructure
+
+
 1.0.0 (2015-03-10)
 ------------------
 

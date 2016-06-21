@@ -2,7 +2,7 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
@@ -10,251 +10,242 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-20 11:03+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Gentian Mazrekaj <gentian.mazrekaj@divio.ch>, 2016\n"
-"Language-Team: German (https://www.transifex.com/divio/teams/58664/de/)\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: de\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: boilerplates/bootstrap3/templates/aldryn_locations/plugins/locations.html:18
 #: templates/aldryn_locations/plugins/locations.html:15
 msgid "Your address"
-msgstr "Ihre Adresse"
+msgstr ""
 
 #: boilerplates/bootstrap3/templates/aldryn_locations/plugins/locations.html:19
 #: templates/aldryn_locations/plugins/locations.html:16
 msgid "Street, City or Country"
-msgstr "Strasse, Stadt oder Land"
+msgstr ""
 
 #: boilerplates/bootstrap3/templates/aldryn_locations/plugins/locations.html:33
 #: boilerplates/legacy/templates/aldryn_locations/plugins/locations.html:26
 #: templates/aldryn_locations/plugins/locations.html:18
 msgid "Get directions"
-msgstr "Routenplaner"
+msgstr ""
 
 #: boilerplates/legacy/templates/aldryn_locations/plugins/locations.html:18
 msgid "Your address: "
-msgstr "Ihre Adresse:"
+msgstr ""
 
 #: cms_plugins.py:20
 msgid "Map"
-msgstr "Karte"
+msgstr ""
 
 #: cms_plugins.py:30 cms_plugins.py:94 cms_plugins.py:115 cms_plugins.py:144
 #: cms_plugins.py:161
 msgid "Advanced"
-msgstr "Erweitert"
+msgstr ""
 
 #: cms_plugins.py:87 models.py:76
 msgid "Location"
-msgstr "Standort"
+msgstr ""
 
 #: cms_plugins.py:104
 msgid "Route Location"
-msgstr "Routenstandort"
+msgstr ""
 
 #: cms_plugins.py:127
 msgid "Place (IFrame)"
-msgstr "Ort (iFrame)"
+msgstr ""
 
 #: cms_plugins.py:132
 msgid "Search (IFrame)"
-msgstr "Suchen (iFrame)"
+msgstr ""
 
 #: cms_plugins.py:138
 msgid "View (IFrame)"
-msgstr "Ansicht (iFrame)"
+msgstr ""
 
 #: cms_plugins.py:153
 msgid "Directions (IFrame)"
-msgstr "Webbeschreibung (iFrame)"
+msgstr ""
 
 #: forms.py:39
 msgid "Must be a positive integer followed by “px” or “%”."
-msgstr "Muss eine positive ganze Zahl sein gefolgt von \"px oder “%”."
+msgstr ""
 
 #: forms.py:42
 msgid "Must be a positive integer followed by “px”."
-msgstr "Muss eine positive ganze Zahl sein gefolgt von \"px\"."
+msgstr ""
 
 #: models.py:18
 msgid "Roadmap"
-msgstr "Fahrplan"
+msgstr ""
 
 #: models.py:19
 msgid "Satellite"
-msgstr "Satellit"
+msgstr ""
 
 #: models.py:23
 msgid "Hybrid"
-msgstr "Hybrid"
+msgstr ""
 
 #: models.py:24
 msgid "Terrain"
-msgstr "Gelände"
+msgstr ""
 
 #: models.py:30
 msgid "map title"
-msgstr "Kartentitel"
+msgstr ""
 
 #: models.py:34 models.py:157
 msgid "Zoom level"
-msgstr "Vergrößerungsstufe"
+msgstr ""
 
 #: models.py:35
 msgid "Leave empty for auto zoom"
-msgstr "Leer lassen für automatischen Zoomen."
+msgstr ""
 
 #: models.py:38
 msgid "Route Planner Title"
-msgstr "Routenplaner Titel"
+msgstr ""
 
 #: models.py:39
 msgid "Calculate your fastest way to here"
-msgstr "Schnellste Route berechnen"
+msgstr ""
 
 #: models.py:42 models.py:169
 msgid "width"
-msgstr "Breite"
+msgstr ""
 
 #: models.py:43 models.py:170
 msgid "Plugin width (in pixels or percent)."
-msgstr "Plugin Breite (in Pixels oder Prozent)"
+msgstr ""
 
 #: models.py:46 models.py:173
 msgid "height"
-msgstr "Höhe"
+msgstr ""
 
 #: models.py:47 models.py:174
 msgid "Plugin height (in pixels)."
-msgstr "Plugin Höhe (in Pixel)."
+msgstr ""
 
 #: models.py:50
 msgid "Enable scrollwheel zooming on the map"
-msgstr "Aktiviere Scrollrad-Zoomen auf der Karte"
+msgstr ""
 
 #: models.py:53
 msgid "Enable double click to zoom"
-msgstr "Dop­pel­klick Aktivieren zum Zoomen"
+msgstr ""
 
 #: models.py:55
 msgid "Allow map dragging"
-msgstr "Erlaube die Karte zu ziehen."
+msgstr ""
 
 #: models.py:58
 msgid "Enable keyboard shortcuts"
-msgstr "Aktiviere Tastenkombinationen"
+msgstr ""
 
 #: models.py:60
 msgid "Show pan control"
-msgstr "Zeige Pan Controller"
+msgstr ""
 
 #: models.py:62
 msgid "Show zoom control"
-msgstr "Zeige Zoom Controller"
+msgstr ""
 
 #: models.py:65
 msgid "Show Street View control"
-msgstr "Zeige Street View Controller"
+msgstr ""
 
 #: models.py:67 models.py:149
 msgid "Map Type"
-msgstr "Kartentyp"
+msgstr ""
 
 #: models.py:76
 msgid "Locations"
-msgstr "Standort"
+msgstr ""
 
 #: models.py:77
 msgid "Routes"
-msgstr "Routen"
+msgstr ""
 
 #: models.py:77
 msgid "Route"
-msgstr "Route"
+msgstr ""
 
 #: models.py:89
 msgid "Empty: please add at least one location or route"
-msgstr "Leer: Bitte fügen sie mindestens einen Ort oder Route hinzu."
+msgstr ""
 
 #: models.py:106
 msgid "address"
-msgstr "Adresse"
+msgstr ""
 
 #: models.py:107
 msgid "zip code"
-msgstr "Postleitzahl"
+msgstr ""
 
 #: models.py:108
 msgid "city"
-msgstr "Stadt"
+msgstr ""
 
 #: models.py:111
 msgid "additional content"
-msgstr "Zusätzlicher Inhalt"
+msgstr ""
 
 #: models.py:112
 msgid "Displayed under address in the bubble."
-msgstr "Wird unter der Addresse angezeigt."
+msgstr ""
 
 #: models.py:115
 msgid "latitude"
-msgstr "Breitengrad"
+msgstr ""
 
 #: models.py:116
 msgid "Use latitude & longitude to fine tune the map position."
 msgstr ""
-"Benutze Breitengrad & Längengrad für die genauere Berechung der "
-"Kartenposition."
 
 #: models.py:119
 msgid "longitude"
-msgstr "Längengrad"
+msgstr ""
 
 #: models.py:146
 msgid "Query"
-msgstr "Abfragen"
+msgstr ""
 
 #: models.py:146
 msgid ""
-"defines the place to highlight on the map. It accepts a location as either a"
-" place name or address"
+"defines the place to highlight on the map. It accepts a location as either a "
+"place name or address"
 msgstr ""
-"Definiere einen Ort auf der Karte zu markieren. Akzeptiert wird entweder ein"
-" Ortsname oder eine Adresse."
 
 #: models.py:152
 msgid "Center of the map (latitude + longitude)"
-msgstr "Zentrum auf der Karte (Breitengrad + Längengrad)"
+msgstr ""
 
 #: models.py:153
 msgid ""
 "optionally define the center of the map view. It accepts a comma-separated "
 "latitude and longitude value (such as 37.4218,-122.0840)."
 msgstr ""
-"Optional.: die Mitte der Karte definieren. Ein Kommata getrennten Breiten- "
-"und Längenwert (z. B. 37.4218,-122.0840) muss eingegeben werden."
 
 #: models.py:158
 msgid ""
 "0 (the whole world) to 21 (individual buildings). Leave empty for auto zoom"
 msgstr ""
-"0 (gesammte Welt) zu 21 (individuele Bauten). Leer Lassen für automatisches "
-"Zoomen. "
 
 #: models.py:161
 msgid "language for ui elements"
-msgstr "Sprache für UI Elemente"
+msgstr ""
 
 #: models.py:161
 msgid "default to page language"
-msgstr "Standardsprache der Seite verwenden"
+msgstr ""
 
 #: models.py:164
 msgid "map region (ccTLD)"
-msgstr "Kartenregion (ccTLD)"
+msgstr ""
 
 #: models.py:165
 msgid ""
@@ -262,111 +253,102 @@ msgid ""
 "political sensitivities. Accepts a region code specified as a two-character "
 "ccTLD (top-level domain) value."
 msgstr ""
-"Definiere die entsprechenden Grenzen und Labels, basierend auf "
-"geopolitischen Sensitivitäten. Akzeptiert wird ein Regional Code spezifiert "
-"als ein zweistelligen ccTLD (top-level domain) Wert."
 
 #: models.py:238
 msgid "Automatic"
-msgstr "Automatisch"
+msgstr ""
 
 #: models.py:247
 msgid "Driving"
-msgstr "Fahren"
+msgstr ""
 
 #: models.py:248
 msgid "Walking"
-msgstr "Laufen"
+msgstr ""
 
 #: models.py:249
 msgid "Bicycling"
-msgstr "Velofahren"
+msgstr ""
 
 #: models.py:250
 msgid "Transit"
-msgstr "Transit"
+msgstr ""
 
 #: models.py:251
 msgid "Flying"
-msgstr "Fliegen"
+msgstr ""
 
 #: models.py:259
 msgid "Tolls"
-msgstr "Zolle"
+msgstr ""
 
 #: models.py:260
 msgid "Highways"
-msgstr "Autobahn"
+msgstr ""
 
 #: models.py:261
 msgid "Ferries"
-msgstr "Fähren"
+msgstr ""
 
 #: models.py:263
 msgid "Tolls & Highways"
-msgstr "Zolle & Autobahnen"
+msgstr ""
 
 #: models.py:264
 msgid "Tolls & Ferries"
-msgstr "Zolle & Fähren"
+msgstr ""
 
 #: models.py:265
 msgid "Ferries & Highways"
-msgstr "Fähren & Highways"
+msgstr ""
 
 #: models.py:267
 msgid "Tolls, Ferries & Highways"
-msgstr "Zolle, Fähren & Autobahnen"
+msgstr ""
 
 #: models.py:271
 msgid "Metric"
-msgstr "Metrisch"
+msgstr ""
 
 #: models.py:272
 msgid "Imperial"
-msgstr "Zoll"
+msgstr ""
 
 #: models.py:280
 msgid "origin"
-msgstr "Ausgangspunk"
+msgstr ""
 
 #: models.py:281
 msgid ""
 "defines the origin and accepts a location as either a place name or address"
 msgstr ""
-"Definiere den Ausgangspunk und wähle den Ort entweder als Ortsbezeichnung "
-"oder als Adresse."
 
 #: models.py:284
 msgid "destination"
-msgstr "Ziel"
+msgstr ""
 
 #: models.py:285
 msgid ""
 "defines the destination and accepts a location as either a place name or "
 "address"
 msgstr ""
-"Definiere den Ausgangspunk und wähle den Ort entweder als Ortsbezeichnung "
-"oder als Adresse."
 
 #: models.py:288
 msgid "list of waypoints"
-msgstr "Liste von Wegpunkten"
+msgstr ""
 
 #: models.py:289
 msgid "separated by the pipe character (|) (e.g. Berlin,Germany|Paris,France)"
 msgstr ""
-"Getrennt durch das Pipe-Zeichen (|) (z Berlin, Deutschland | Paris, "
-"Frankreich)"
 
 #: models.py:291
 msgid "travel mode"
-msgstr "Fahrmodus"
+msgstr ""
 
 #: models.py:292
 msgid "avoid certain means"
-msgstr "vermeiden bestimmte Mittel"
+msgstr ""
 
 #: models.py:294
 msgid "units for distances in results"
-msgstr "Einheiten für die Entfernungen als Ergebnisse"
+msgstr ""
