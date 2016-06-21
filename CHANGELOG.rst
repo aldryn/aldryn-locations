@@ -2,7 +2,7 @@ CHANGELOG
 =========
 
 
-1.0.1 (UNRELEASED)
+1.0.1 (2016-06-21)
 ------------------
 
 * Added translations infrastructure
