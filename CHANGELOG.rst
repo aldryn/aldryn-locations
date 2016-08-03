@@ -2,6 +2,12 @@ CHANGELOG
 =========
 
 
+next
+----
+
+* Use Environment variable for API key (when used with aldryn-addons)
+
+
 1.0.1 (2016-06-21)
 ------------------
 
