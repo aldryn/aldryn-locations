@@ -2,6 +2,12 @@ CHANGELOG
 =========
 
 
+1.0.3 (2016-08-18)
+------------------
+
+* Add formatting setting for marker info windows `ALDRYN_LOCATIONS_MARKER_CONTENT_FORMAT`
+
+
 1.0.2 (2016-08-03)
 ------------------
 
