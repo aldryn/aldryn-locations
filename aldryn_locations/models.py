@@ -7,6 +7,8 @@ from cms.models import CMSPlugin
 from cms.utils.compat.dj import python_2_unicode_compatible
 
 
+MARKER_CONTENT_FORMAT = unicode(settings.ALDRYN_LOCATIONS_MARKER_CONTENT_FORMAT)
+
 ZOOM_LEVELS = [(str(level), str(level)) for level in range(22)]
 
 ROADMAP = 'roadmap'
@@ -108,8 +110,9 @@ class LocationPlugin(CMSPlugin):
     city = models.CharField(_("city"), max_length=100)
 
     content = models.CharField(
-        _("additional content"), max_length=255, blank=True,
-        help_text=_('Displayed under address in the bubble.'))
+        _('Content'), max_length=255, blank=True,
+        help_text=_('Displayed in a info window above location marker')
+    )
 
     lat = models.FloatField(
         _('latitude'), null=True, blank=True,
@@ -122,6 +125,24 @@ class LocationPlugin(CMSPlugin):
     @property
     def route_planner(self):
         return False
+
+    def get_content(self):
+        if not self.content:
+            return None
+
+        fmt = MARKER_CONTENT_FORMAT
+
+        if not fmt:
+            return self.content
+
+        return fmt.format(
+            content=self.content,
+            address=self.address,
+            zipcode=self.zipcode,
+            city=self.city,
+            lat=self.lat,
+            lng=self.lng,
+        )
 
     def get_lat_lng(self):
         if self.lat and self.lng:

@@ -41,7 +41,7 @@ class MapCMSPlugin(LocationsBase):
             return {
                 'address': "%s, %s %s" % (item.address, item.zipcode, item.city),
                 'latlng': item.get_lat_lng() or None,
-                'content': item.content or None,
+                'content': item.get_content(),
                 'admin': reverse('admin:cms_page_edit_plugin', args=[item.pk]),
             }
 
