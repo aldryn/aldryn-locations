@@ -1,14 +1,21 @@
 from django.db import models
+from django.http import QueryDict
 from django.template.defaultfilters import urlencode
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
 
 from cms.models import CMSPlugin
+from cms.utils.i18n import get_current_language
 from cms.utils.compat.dj import python_2_unicode_compatible
 
 
+GOOGLE_MAPS_API_KEY = settings.ALDRYN_LOCATIONS_GOOGLEMAPS_APIKEY
+GOOGLE_MAPS_STATICMAPS_URL = getattr(
+    settings,
+    'ALDRYN_LOCATIONS_GOOGLEMAPS_STATICMAPS_URL',
+    'https://maps.googleapis.com/maps/api/staticmap',
+)
 MARKER_CONTENT_FORMAT = unicode(settings.ALDRYN_LOCATIONS_MARKER_CONTENT_FORMAT)
-
 ZOOM_LEVELS = [(str(level), str(level)) for level in range(22)]
 
 ROADMAP = 'roadmap'
@@ -95,6 +102,42 @@ class MapPlugin(CMSPlugin):
 
         return u'%s' % ret
 
+    @property
+    def staticmap_querystring(self):
+        if not self.child_plugin_instances:
+            return None
+
+        def clean_size(size):
+            if size.endswith('px'):
+                return int(size.replace('px', ''))
+            return 1000  # default
+
+        qdict = QueryDict('', mutable=True)
+        qdict.update({
+            'key': GOOGLE_MAPS_API_KEY,
+            'size': '{}x{}'.format(
+                clean_size(self.width),
+                clean_size(self.height)
+            ),
+            'maptype': self.map_type,
+            'language': get_current_language()
+        })
+
+        if self.zoom:
+            qdict['zoom'] = self.zoom
+
+        query = qdict.urlencode()
+
+        for location in self.child_plugin_instances:
+            lat_lng = location.get_lat_lng()
+            location = (
+                ','.join(lat_lng) if lat_lng else
+                ' '.join((location.address, location.zipcode, location.city))
+            )
+            query += '&markers={}'.format(urlencode(location))
+
+        return '{}?{}'.format(GOOGLE_MAPS_STATICMAPS_URL, query)
+
     def get_route_planner(self):
         if self.child_plugin_instances:
             for location in self.child_plugin_instances:
@@ -120,7 +163,9 @@ class LocationPlugin(CMSPlugin):
 
     lng = models.FloatField(
         _('longitude'), null=True, blank=True)
-    # show_route = models.BooleanField(verbose_name=_('show route'), default=False)
+
+    def __str__(self):
+        return u'%s, %s %s' % (self.address, self.zipcode, self.city)
 
     @property
     def route_planner(self):
@@ -147,9 +192,6 @@ class LocationPlugin(CMSPlugin):
     def get_lat_lng(self):
         if self.lat and self.lng:
             return self.lat, self.lng
-
-    def __str__(self):
-        return u'%s, %s %s' % (self.address, self.zipcode, self.city)
 
 
 class RouteLocationPlugin(LocationPlugin):
