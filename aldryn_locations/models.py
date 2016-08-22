@@ -103,7 +103,7 @@ class MapPlugin(CMSPlugin):
         return u'%s' % ret
 
     @property
-    def staticmap_querystring(self):
+    def staticmap_url(self):
         if not self.child_plugin_instances:
             return None
 
