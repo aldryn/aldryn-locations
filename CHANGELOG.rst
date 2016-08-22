@@ -2,6 +2,13 @@ CHANGELOG
 =========
 
 
+1.0.4 (2016-08-22)
+------------------
+
+* Fix various `max_length` attributes
+* Add static map query url getter
+
+
 1.0.3 (2016-08-18)
 ------------------
 
