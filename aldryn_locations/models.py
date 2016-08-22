@@ -29,7 +29,7 @@ EXTENDED_MAP_CHOICES = MAP_CHOICES + [
 
 @python_2_unicode_compatible
 class MapPlugin(CMSPlugin):
-    title = models.CharField(_("map title"), max_length=100, blank=True,
+    title = models.CharField(_("map title"), max_length=255, blank=True,
                              null=True)
 
     zoom = models.CharField(
@@ -37,15 +37,15 @@ class MapPlugin(CMSPlugin):
         help_text=_('Leave empty for auto zoom'), max_length=20)
 
     route_planner_title = models.CharField(
-        _('Route Planner Title'), max_length=150, blank=True, null=True,
+        _('Route Planner Title'), max_length=255, blank=True, null=True,
         default=_('Calculate your fastest way to here'))
 
     width = models.CharField(
-        _('width'), max_length=6, default='100%',
+        _('width'), max_length=255, default='100%',
         help_text=_('Plugin width (in pixels or percent).'))
 
     height = models.CharField(
-        _('height'), max_length=6, default='400px',
+        _('height'), max_length=255, default='400px',
         help_text=_('Plugin height (in pixels).'))
 
     scrollwheel = models.BooleanField(
@@ -66,7 +66,7 @@ class MapPlugin(CMSPlugin):
     street_view_control = models.BooleanField(
         _('Show Street View control'), default=True)
 
-    map_type = models.CharField(_('Map Type'), max_length=300, choices=EXTENDED_MAP_CHOICES, default=ROADMAP)
+    map_type = models.CharField(_('Map Type'), max_length=255, choices=EXTENDED_MAP_CHOICES, default=ROADMAP)
 
     def __str__(self):
         ret = ''
@@ -105,9 +105,9 @@ class MapPlugin(CMSPlugin):
 
 @python_2_unicode_compatible
 class LocationPlugin(CMSPlugin):
-    address = models.CharField(_("address"), max_length=150)
+    address = models.CharField(_("address"), max_length=255)
     zipcode = models.CharField(_("zip code"), max_length=30)
-    city = models.CharField(_("city"), max_length=100)
+    city = models.CharField(_("city"), max_length=255)
 
     content = models.CharField(
         _('Content'), max_length=255, blank=True,
@@ -167,7 +167,7 @@ class EmbedPlugin(CMSPlugin):
         _('Query'), max_length=255, help_text=_('defines the place to highlight on the map. It accepts a location '
                                                 'as either a place name or address'))
 
-    map_type = models.CharField(_('Map Type'), max_length=300, choices=MAP_CHOICES, default=ROADMAP)
+    map_type = models.CharField(_('Map Type'), max_length=255, choices=MAP_CHOICES, default=ROADMAP)
 
     center = models.CharField(
         _('Center of the map (latitude + longitude)'), null=True, blank=True, max_length=255,
@@ -187,11 +187,11 @@ class EmbedPlugin(CMSPlugin):
                     'Accepts a region code specified as a two-character ccTLD (top-level domain) value.'))
 
     width = models.CharField(
-        _('width'), max_length=6, default='100%',
+        _('width'), max_length=255, default='100%',
         help_text=_('Plugin width (in pixels or percent).'))
 
     height = models.CharField(
-        _('height'), max_length=6, default='400px',
+        _('height'), max_length=255, default='400px',
         help_text=_('Plugin height (in pixels).'))
 
     class Meta:
