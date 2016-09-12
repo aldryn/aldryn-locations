@@ -5,6 +5,7 @@ from aldryn_locations import __version__
 
 REQUIREMENTS = [
     'aldryn-boilerplates>=0.6',
+    'django-filer',
 ]
 
 CLASSIFIERS = [

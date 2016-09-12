@@ -6,9 +6,7 @@ from django.core.urlresolvers import reverse
 from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 
-from .forms import MapPluginForm, RouteLocationPluginForm, EmbedViewPluginForm
-from .models import LocationPlugin, MapPlugin, RouteLocationPlugin, EmbedPlacePlugin, EmbedViewPlugin, \
-    EmbedSearchPlugin, EmbedDirectionsPlugin
+from . import models, forms
 
 
 class LocationsBase(CMSPluginBase):
@@ -16,13 +14,17 @@ class LocationsBase(CMSPluginBase):
 
 
 class MapCMSPlugin(LocationsBase):
-    model = MapPlugin
+    model = models.MapPlugin
     name = _('Map')
     render_template = "aldryn_locations/plugins/locations.html"
     admin_preview = True
-    form = MapPluginForm
+    form = forms.MapPluginForm
     allow_children = True
-    child_classes = ('LocationCMSPlugin', 'RouteLocationCMSPlugin')
+    child_classes = (
+        'LocationCMSPlugin',
+        'RouteLocationCMSPlugin',
+        'PathLocationCMSPlugin',
+    )
     fieldsets = (
         (None, {
             'fields': (('title', 'map_type'))
@@ -37,20 +39,23 @@ class MapCMSPlugin(LocationsBase):
     )
 
     def render(self, context, instance, placeholder):
-        def prepare_item(item):
-            return {
-                'address': "%s, %s %s" % (item.address, item.zipcode, item.city),
-                'latlng': item.get_lat_lng() or None,
-                'content': item.get_content(),
-                'admin': reverse('admin:cms_page_edit_plugin', args=[item.pk]),
-            }
+        location_data = []
+        path_sources = []
 
-        if instance.child_plugin_instances:
-            location_data = [
-                prepare_item(location) for location in instance.child_plugin_instances
-            ]
-        else:
-            location_data = []
+        request = context['request']
+        base_url = '{0}://{1}'.format(
+            'https' if request.is_secure() else 'http',
+            request.get_host()
+        )
+
+        for child in instance.child_plugin_instances or []:
+            data = child.get_location_data_for_map()
+            if isinstance(child, models.PathLocationPlugin):
+                # make url absolute (required by Google API)
+                data = '{}{}'.format(base_url, data)
+                path_sources.append(data)
+            else:
+                location_data.append(data)
 
         # Options for the map comes from plugin so I assigned it here
         options = {
@@ -73,6 +78,7 @@ class MapCMSPlugin(LocationsBase):
             'zoom': instance.zoom if instance.zoom else 'false',
             'placeholder': placeholder,
             'locations': json.dumps(location_data),
+            'path_sources': json.dumps(path_sources),
             'options': json.dumps(options),
             'map_type': json.dumps(instance.map_type),
             'route_planner': json.dumps(route_planner)
@@ -81,12 +87,15 @@ class MapCMSPlugin(LocationsBase):
         return context
 
 
-class LocationCMSPlugin(LocationsBase):
+class MapChildBase(LocationsBase):
     render_template = "aldryn_locations/plugins/empty.html"
-    model = LocationPlugin
-    name = _('Location')
     require_parent = True
     parent_classes = ['MapCMSPlugin']
+
+
+class LocationCMSPlugin(MapChildBase):
+    model = models.LocationPlugin
+    name = _('Location')
     fieldsets = (
         (None, {
             'fields': ('address', ('zipcode', 'city',)),
@@ -99,9 +108,14 @@ class LocationCMSPlugin(LocationsBase):
 
 
 class RouteLocationCMSPlugin(LocationCMSPlugin):
-    model = RouteLocationPlugin
-    form = RouteLocationPluginForm
+    model = models.RouteLocationPlugin
+    form = forms.RouteLocationPluginForm
     name = _('Route Location')
+
+
+class PathLocationCMSPlugin(MapChildBase):
+    model = models.PathLocationPlugin
+    name = _('Location via path file')
 
 
 # 'New Maps' embed plugins (IFrame)
@@ -123,18 +137,18 @@ class EmbedMapCMSPluginBase(LocationsBase):
 
 
 class EmbedPlaceCMSPlugin(EmbedMapCMSPluginBase):
-    model = EmbedPlacePlugin
+    model = models.EmbedPlacePlugin
     name = _('Place (IFrame)')
 
 
 class EmbedSearchCMSPlugin(EmbedMapCMSPluginBase):
-    model = EmbedSearchPlugin
+    model = models.EmbedSearchPlugin
     name = _('Search (IFrame)')
 
 
 class EmbedViewCMSPlugin(EmbedMapCMSPluginBase):
-    model = EmbedViewPlugin
-    form = EmbedViewPluginForm
+    model = models.EmbedViewPlugin
+    form = forms.EmbedViewPluginForm
     name = _('View (IFrame)')
 
     fieldsets = (
@@ -149,7 +163,7 @@ class EmbedViewCMSPlugin(EmbedMapCMSPluginBase):
 
 
 class EmbedDirectionsCMSPlugin(EmbedMapCMSPluginBase):
-    model = EmbedDirectionsPlugin
+    model = models.EmbedDirectionsPlugin
     name = _('Directions (IFrame)')
     fieldsets = (
         (None, {
@@ -164,10 +178,10 @@ class EmbedDirectionsCMSPlugin(EmbedMapCMSPluginBase):
         }),
     )
 
-
 plugin_pool.register_plugin(MapCMSPlugin)
 plugin_pool.register_plugin(LocationCMSPlugin)
 plugin_pool.register_plugin(RouteLocationCMSPlugin)
+plugin_pool.register_plugin(PathLocationCMSPlugin)
 plugin_pool.register_plugin(EmbedPlaceCMSPlugin)
 plugin_pool.register_plugin(EmbedSearchCMSPlugin)
 plugin_pool.register_plugin(EmbedViewCMSPlugin)

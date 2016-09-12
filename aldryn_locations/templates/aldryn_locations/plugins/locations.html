@@ -33,6 +33,7 @@
     var bound = new google.maps.LatLngBounds();
     var geocoder = new google.maps.Geocoder();
     var markers = {{ locations|safe }};
+    var pathSources = {{ path_sources|safe }};
     var routePlanner = {{ route_planner|safe }};
     var editMode = {% if request.toolbar.edit_mode %}true{% else %}false{% endif %};
     var map;
@@ -104,6 +105,14 @@
         });
     }
 
+    function loadKmlLayer(src, map) {
+        new google.maps.KmlLayer(src, {
+            suppressInfoWindows: true,
+            preserveViewport: false,
+            map: map
+        });
+    }
+
     // loop through all given markers
     for (var i = 0; i < markers.length; i++) {
         var marker = markers[i];
@@ -119,6 +128,13 @@
 
     // load the map
     map = new google.maps.Map(container, options);
+
+    // Add KMLLayers for each url in pathSources
+    for (var i = 0; i < pathSources.length; i++) {
+        var source = pathSources[i];
+        loadKmlLayer(source, map);
+    }
+
 })();
 </script>
 {% endaddtoblock %}

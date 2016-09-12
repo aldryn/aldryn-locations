@@ -5,6 +5,7 @@
     "package-name": "aldryn-locations",
     "installed-apps": [
         "aldryn_boilerplates",
+        "filer",
         "aldryn_locations"
     ],
     "author": {

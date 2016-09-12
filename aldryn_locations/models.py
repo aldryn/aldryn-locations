@@ -3,10 +3,13 @@ from django.http import QueryDict
 from django.template.defaultfilters import urlencode
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
+from django.core.urlresolvers import reverse
 
-from cms.models import CMSPlugin
+from cms.models import CMSPlugin, Site
 from cms.utils.i18n import get_current_language
 from cms.utils.compat.dj import python_2_unicode_compatible
+
+from filer.fields.file import FilerFileField
 
 
 GOOGLE_MAPS_API_KEY = settings.ALDRYN_LOCATIONS_GOOGLEMAPS_APIKEY
@@ -128,7 +131,7 @@ class MapPlugin(CMSPlugin):
 
         query = qdict.urlencode()
 
-        for location in self.child_plugin_instances:
+        for location in self.child_plugin_instances or []:
             lat_lng = location.get_lat_lng()
             location = (
                 ','.join(lat_lng) if lat_lng else
@@ -139,10 +142,9 @@ class MapPlugin(CMSPlugin):
         return '{}?{}'.format(GOOGLE_MAPS_STATICMAPS_URL, query)
 
     def get_route_planner(self):
-        if self.child_plugin_instances:
-            for location in self.child_plugin_instances:
-                if location.route_planner:
-                    return location.address, location.zipcode, location.city
+        for location in self.child_plugin_instances or []:
+            if location.route_planner:
+                return location.address, location.zipcode, location.city
         return False
 
 
@@ -193,11 +195,42 @@ class LocationPlugin(CMSPlugin):
         if self.lat and self.lng:
             return self.lat, self.lng
 
+    def get_location_data_for_map(self):
+        return {
+            'address': '{}, {} {}'.format(self.address, self.zipcode, self.city),
+            'latlng': self.get_lat_lng(),
+            'content': self.get_content(),
+            'admin': reverse('admin:cms_page_edit_plugin', args=[self.pk]),
+        }
+
 
 class RouteLocationPlugin(LocationPlugin):
     @property
     def route_planner(self):
         return True
+
+
+class PathLocationPlugin(CMSPlugin):
+    path_file = FilerFileField(
+        verbose_name=_('Path File (e.g. KML)'),
+        related_name='+',
+    )
+
+    @property
+    def route_planner(self):
+        return False
+
+    def copy_relations(self, oldinstance):
+        self.path_file = oldinstance.path_file
+
+    def __unicode__(self):
+        if self.path_file:
+            return self.path_file.name
+        return self.pk
+
+    def get_location_data_for_map(self):
+        if self.path_file:
+            return self.path_file.url
 
 
 # 'New Maps' embed plugins (IFrame)
