@@ -2,10 +2,18 @@ CHANGELOG
 =========
 
 
+1.1.0 (2016-09-14)
+------------------
+
+* Add "Location from Path file" plugin
+* Drop support for Django 1.6 and below
+
+
 1.0.5 (2016-08-22)
 ------------------
 
 * Rename static map url property
+
 
 1.0.4 (2016-08-22)
 ------------------
