@@ -2,6 +2,12 @@ CHANGELOG
 =========
 
 
+1.1.1 (2016-09-14)
+------------------
+
+* fix staticmap with new kml location plugin
+
+
 1.1.0 (2016-09-14)
 ------------------
 
