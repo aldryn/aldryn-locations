@@ -138,6 +138,9 @@ class MapPlugin(CMSPlugin):
         query = qdict.urlencode()
 
         for location in self.child_plugin_instances or []:
+            if not hasattr(location, 'get_lat_lng'):
+                continue
+
             lat_lng = location.get_lat_lng()
             location = (
                 ','.join(lat_lng) if lat_lng else
