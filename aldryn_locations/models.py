@@ -150,6 +150,8 @@ class MapPlugin(CMSPlugin):
 
 @python_2_unicode_compatible
 class LocationPlugin(CMSPlugin):
+    route_planner = False
+
     address = models.CharField(_("address"), max_length=255)
     zipcode = models.CharField(_("zip code"), max_length=30)
     city = models.CharField(_("city"), max_length=255)
@@ -168,10 +170,6 @@ class LocationPlugin(CMSPlugin):
 
     def __str__(self):
         return u'%s, %s %s' % (self.address, self.zipcode, self.city)
-
-    @property
-    def route_planner(self):
-        return False
 
     def get_content(self):
         if not self.content:
@@ -205,20 +203,16 @@ class LocationPlugin(CMSPlugin):
 
 
 class RouteLocationPlugin(LocationPlugin):
-    @property
-    def route_planner(self):
-        return True
+    route_planner = True
 
 
 class PathLocationPlugin(CMSPlugin):
+    route_planner = False
+
     path_file = FilerFileField(
         verbose_name=_('Path File (e.g. KML)'),
         related_name='+',
     )
-
-    @property
-    def route_planner(self):
-        return False
 
     def copy_relations(self, oldinstance):
         self.path_file = oldinstance.path_file
