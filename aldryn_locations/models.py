@@ -3,10 +3,13 @@ from django.http import QueryDict
 from django.template.defaultfilters import urlencode
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
+from django.core.urlresolvers import reverse
 
-from cms.models import CMSPlugin
+from cms.models import CMSPlugin, Site
 from cms.utils.i18n import get_current_language
 from cms.utils.compat.dj import python_2_unicode_compatible
+
+from filer.fields.file import FilerFileField
 
 
 GOOGLE_MAPS_API_KEY = settings.ALDRYN_LOCATIONS_GOOGLEMAPS_APIKEY
@@ -36,6 +39,12 @@ EXTENDED_MAP_CHOICES = MAP_CHOICES + [
 
 @python_2_unicode_compatible
 class MapPlugin(CMSPlugin):
+    cmsplugin_ptr = models.OneToOneField(
+        CMSPlugin,
+        related_name='%(app_label)s_%(class)s',
+        parent_link=True,
+    )
+
     title = models.CharField(_("map title"), max_length=255, blank=True,
                              null=True)
 
@@ -128,7 +137,7 @@ class MapPlugin(CMSPlugin):
 
         query = qdict.urlencode()
 
-        for location in self.child_plugin_instances:
+        for location in self.child_plugin_instances or []:
             lat_lng = location.get_lat_lng()
             location = (
                 ','.join(lat_lng) if lat_lng else
@@ -139,15 +148,22 @@ class MapPlugin(CMSPlugin):
         return '{}?{}'.format(GOOGLE_MAPS_STATICMAPS_URL, query)
 
     def get_route_planner(self):
-        if self.child_plugin_instances:
-            for location in self.child_plugin_instances:
-                if location.route_planner:
-                    return location.address, location.zipcode, location.city
+        for location in self.child_plugin_instances or []:
+            if location.route_planner:
+                return location.address, location.zipcode, location.city
         return False
 
 
 @python_2_unicode_compatible
 class LocationPlugin(CMSPlugin):
+    route_planner = False
+
+    cmsplugin_ptr = models.OneToOneField(
+        CMSPlugin,
+        related_name='%(app_label)s_%(class)s',
+        parent_link=True,
+    )
+
     address = models.CharField(_("address"), max_length=255)
     zipcode = models.CharField(_("zip code"), max_length=30)
     city = models.CharField(_("city"), max_length=255)
@@ -166,10 +182,6 @@ class LocationPlugin(CMSPlugin):
 
     def __str__(self):
         return u'%s, %s %s' % (self.address, self.zipcode, self.city)
-
-    @property
-    def route_planner(self):
-        return False
 
     def get_content(self):
         if not self.content:
@@ -193,11 +205,44 @@ class LocationPlugin(CMSPlugin):
         if self.lat and self.lng:
             return self.lat, self.lng
 
+    def get_location_data_for_map(self):
+        return {
+            'address': '{}, {} {}'.format(self.address, self.zipcode, self.city),
+            'latlng': self.get_lat_lng(),
+            'content': self.get_content(),
+            'admin': reverse('admin:cms_page_edit_plugin', args=[self.pk]),
+        }
+
 
 class RouteLocationPlugin(LocationPlugin):
-    @property
-    def route_planner(self):
-        return True
+    route_planner = True
+
+
+class PathLocationPlugin(CMSPlugin):
+    route_planner = False
+
+    cmsplugin_ptr = models.OneToOneField(
+        CMSPlugin,
+        related_name='%(app_label)s_%(class)s',
+        parent_link=True,
+    )
+
+    path_file = FilerFileField(
+        verbose_name=_('Path File (e.g. KML)'),
+        related_name='+',
+    )
+
+    def copy_relations(self, oldinstance):
+        self.path_file = oldinstance.path_file
+
+    def __unicode__(self):
+        if self.path_file:
+            return self.path_file.name
+        return self.pk
+
+    def get_location_data_for_map(self):
+        if self.path_file:
+            return self.path_file.url
 
 
 # 'New Maps' embed plugins (IFrame)
@@ -205,6 +250,12 @@ class RouteLocationPlugin(LocationPlugin):
 
 
 class EmbedPlugin(CMSPlugin):
+    cmsplugin_ptr = models.OneToOneField(
+        CMSPlugin,
+        related_name='%(app_label)s_%(class)s',
+        parent_link=True,
+    )
+
     query = models.CharField(
         _('Query'), max_length=255, help_text=_('defines the place to highlight on the map. It accepts a location '
                                                 'as either a place name or address'))

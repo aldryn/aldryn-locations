@@ -55,6 +55,7 @@ var Cl = window.Cl || {};
 
             // add all markers
             this.addMarkers();
+            this.addLayers(this.options.layerSources);
 
             // enable routing
             this.routePlanner();
@@ -87,7 +88,28 @@ var Cl = window.Cl || {};
             }
         },
 
-        addMarker: function (marker) {
+        /**
+         * Adds KLM layers
+         *
+         * @param {String[]} layerSources
+         */
+        addLayers: function (layerSources) {
+            if (!layerSources || !layerSources.length) {
+                return;
+            }
+
+            var that = this;
+
+            layerSources.forEach(function (src) {
+                new google.maps.KmlLayer(src, {
+                    suppressInfoWindows: true,
+                    preserveViewport: false,
+                    map: that.map
+                });
+            });
+        },
+
+        addMarker: function (marker) {
             var that = this;
 
             // Creates a marker on the map, calls fitMap afterwards

@@ -46,12 +46,13 @@
 <script>
 jQuery(document).ready(function () {
     new Cl.Locations('.js-aldryn-locations-{{ object.pk }}', {
-        'zoom': {{ object.zoom|default:12 }},
-        'mapType': {{ map_type|safe }},
-        'settings': {{ options|safe }},
-        'markers': {{ locations|safe }},
-        'routePlanner': {{ route_planner|safe }},
-        'edit': {% if request.toolbar.edit_mode %}true{% else %}false{% endif %}
+        zoom: {{ object.zoom|default:12 }},
+        mapType: {{ map_type|safe }},
+        settings: {{ options|safe }},
+        markers: {{ locations|safe }},
+        routePlanner: {{ route_planner|safe }},
+        layerSources: {{ path_sources|safe }},
+        edit: {% if request.toolbar.edit_mode %}true{% else %}false{% endif %}
     });
 });
 </script>
