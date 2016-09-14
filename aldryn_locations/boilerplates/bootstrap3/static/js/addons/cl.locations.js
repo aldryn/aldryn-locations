@@ -63,6 +63,8 @@ var Cl = window.Cl || {};
             // add all markers
             this.addMarkers(this.options.markers);
 
+            this.addLayers(this.options.layerSources);
+
             // enable routing
             this._routePlanner();
         },
@@ -98,6 +100,27 @@ var Cl = window.Cl || {};
                     this.addMarker(marker);
                 }
             }
+        },
+
+        /**
+         * Adds KLM layers
+         *
+         * @param {String[]} layerSources
+         */
+        addLayers: function (layerSources) {
+            if (!layerSources || !layerSources.length) {
+                return;
+            }
+
+            var that = this;
+
+            layerSources.forEach(function (src) {
+                new google.maps.KmlLayer(src, {
+                    suppressInfoWindows: true,
+                    preserveViewport: false,
+                    map: that.map
+                });
+            });
         },
 
         /**
@@ -144,9 +167,9 @@ var Cl = window.Cl || {};
             if (this.options.edit && window.CMS) {
                 google.maps.event.addListener(marker, 'dblclick', function () {
                     var modal = new CMS.Modal();
-                    modal.open(
+                    modal.open({
                         url: marker.admin
-                    );
+                    });
                 });
             }
 
