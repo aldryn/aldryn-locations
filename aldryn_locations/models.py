@@ -39,6 +39,12 @@ EXTENDED_MAP_CHOICES = MAP_CHOICES + [
 
 @python_2_unicode_compatible
 class MapPlugin(CMSPlugin):
+    cmsplugin_ptr = models.OneToOneField(
+        CMSPlugin,
+        related_name='%(app_label)s_%(class)s',
+        parent_link=True,
+    )
+
     title = models.CharField(_("map title"), max_length=255, blank=True,
                              null=True)
 
@@ -152,6 +158,12 @@ class MapPlugin(CMSPlugin):
 class LocationPlugin(CMSPlugin):
     route_planner = False
 
+    cmsplugin_ptr = models.OneToOneField(
+        CMSPlugin,
+        related_name='%(app_label)s_%(class)s',
+        parent_link=True,
+    )
+
     address = models.CharField(_("address"), max_length=255)
     zipcode = models.CharField(_("zip code"), max_length=30)
     city = models.CharField(_("city"), max_length=255)
@@ -209,6 +221,12 @@ class RouteLocationPlugin(LocationPlugin):
 class PathLocationPlugin(CMSPlugin):
     route_planner = False
 
+    cmsplugin_ptr = models.OneToOneField(
+        CMSPlugin,
+        related_name='%(app_label)s_%(class)s',
+        parent_link=True,
+    )
+
     path_file = FilerFileField(
         verbose_name=_('Path File (e.g. KML)'),
         related_name='+',
@@ -232,6 +250,12 @@ class PathLocationPlugin(CMSPlugin):
 
 
 class EmbedPlugin(CMSPlugin):
+    cmsplugin_ptr = models.OneToOneField(
+        CMSPlugin,
+        related_name='%(app_label)s_%(class)s',
+        parent_link=True,
+    )
+
     query = models.CharField(
         _('Query'), max_length=255, help_text=_('defines the place to highlight on the map. It accepts a location '
                                                 'as either a place name or address'))
