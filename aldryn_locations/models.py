@@ -210,7 +210,7 @@ class LocationPlugin(CMSPlugin):
 
     def get_location_data_for_map(self):
         return {
-            'address': '{}, {} {}'.format(self.address, self.zipcode, self.city),
+            'address': u'{}, {} {}'.format(self.address, self.zipcode, self.city),
             'latlng': self.get_lat_lng(),
             'content': self.get_content(),
             'admin': reverse('admin:cms_page_edit_plugin', args=[self.pk]),
