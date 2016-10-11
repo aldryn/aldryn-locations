@@ -50,7 +50,7 @@ class MapCMSPlugin(LocationsBase):
 
         for child in instance.child_plugin_instances or []:
             data = child.get_location_data_for_map()
-            if isinstance(child, models.PathLocationPlugin):
+            if not data.startswith('http') and isinstance(child, models.PathLocationPlugin):
                 # make url absolute (required by Google API)
                 data = '{}{}'.format(base_url, data)
                 path_sources.append(data)
