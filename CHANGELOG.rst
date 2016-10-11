@@ -2,6 +2,13 @@ CHANGELOG
 =========
 
 
+1.1.3 (2016-10-11)
+------------------
+
+* fix unicode error in location plugin
+* fix error introduced in 1.1.2 (commit f76dedd7)
+
+
 1.1.2 (2016-10-11)
 ------------------
 
